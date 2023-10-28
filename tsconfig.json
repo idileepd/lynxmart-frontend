@@ -1,0 +1,47 @@
+{
+  "downlevelIteration": true,
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true, // Ensures that any non-empty case inside a switch statement includes either break, return, or throw
+
+    /* Other */
+    "esModuleInterop": true, // Helps in commonjs module imports as import
+    "allowSyntheticDefaultImports": true, //import * as React from 'react'; allows as import React from 'react'
+    "forceConsistentCasingInFileNames": true, //Issues error for case sensitive file import  import fileManager.ts by specifying ./FileManager.ts
+    "noImplicitAny": true,
+    "downlevelIteration": true,
+
+    /* some other stuff */
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["src", "vite.config.ts", ".eslintrc.cjs", "src/**/*"],
+  // "include": [
+  //   "vite-env.d.ts",
+  //   "**/*.ts",
+  //   "**/*.tsx",
+  //   ".eslintrc.cjs",
+  //   "vite.config.ts"
+  // ],
+  "exclude": ["node_modules"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
