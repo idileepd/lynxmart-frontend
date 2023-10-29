@@ -1,4 +1,3 @@
-// .login-box {
 // position: absolute;
 // margin-left: auto;
 // margin-right: auto;
@@ -7,22 +6,34 @@
 // text-align: center;
 // width: max-content;
 
-// }
-
-// Create your Styles. Remember, since React-JSS uses the default preset,
-
 import { createUseStyles } from 'react-jss';
 
-// most plugins are available without further configuration needed.
 export const loginStyles = createUseStyles({
   box: {
-    position: 'absolute',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    left: 0,
-    right: 0,
-    textAlign: 'center',
-    width: 'maxContent',
+    width: '100vw',
+    display: 'flex',
   },
-  myLabel: {},
+  descriptionBox: {
+    width: '50%',
+    // backgroundColor: '#18181b',
+    backgroundColor: '#2463eb',
+    height: '100vh',
+  },
+  loginBox: {
+    width: '50%',
+    backgroundColor: '#ffffff',
+    height: '100vh',
+  },
+  logoBox: {
+    display: 'flex',
+    gap: '10px',
+    paddingTop: '28px',
+    paddingLeft: '22px',
+  },
+  name: {
+    fontWeight: '400',
+    fontSize: '1.3rem',
+    color: '#fff',
+    letterSpacing: '.5px',
+  },
 });
