@@ -15,6 +15,8 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userState) => {
       // Todo::  Fetch user data and add
+      console.log('[AuthProvider] -- user state --');
+      console.log(userState);
       setUser(userState);
     });
 

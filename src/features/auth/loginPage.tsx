@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { LoginForm } from './LoginForm';
 import { loginStyles } from './styles';
@@ -22,10 +23,12 @@ export function LoginPage() {
             alignItems: 'start',
           }}
         >
-          <div className={classes.logoBox}>
-            <LogoIcon width={32} height={32} fill="#fff" />
-            <div className={classes.name}>LynxMart</div>
-          </div>
+          <Link to="/">
+            <div className={classes.logoBox}>
+              <LogoIcon width={32} height={32} fill="#fff" />
+              <div className={classes.name}>LynxMart</div>
+            </div>
+          </Link>
           <div
             style={{
               paddingLeft: '22px',

@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Label } from '@radix-ui/react-label';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
+import { auth } from '../firebase';
 
 import { SpinnerIcon } from '@/components/icons';
 import { Input } from '@/components/ui/input';
@@ -10,11 +13,17 @@ interface ILoginForm {
 }
 export function SignupForm({ toggleForm }: ILoginForm) {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    setError('');
+  };
+
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
     setError('');
   };
 
@@ -26,15 +35,41 @@ export function SignupForm({ toggleForm }: ILoginForm) {
       );
   };
 
-  const onSubmit = () => {
+  const validatePassword = () => {
+    return password.length >= 8;
+  };
+
+  const onSubmit = async () => {
     try {
       if (!validateEmail()) {
         setError('Enter a valid email');
 
         return;
       }
+      if (!validatePassword()) {
+        setError('Password length should be 8 characters length');
+
+        return;
+      }
 
       setIsLoading(true);
+
+      const useCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(useCredential.user);
+      //   .then((userCredential) => {
+      //     // Signed up
+      //     const user = userCredential.user;
+      //     // ...
+      //   })
+      //   .catch((error) => {
+      //     const errorCode = error.code;
+      //     const errorMessage = error.message;
+      //     // ..
+      //   });
     } catch (err) {
       console.log(err);
       setError('Something Went Wrong !');
@@ -69,6 +104,19 @@ export function SignupForm({ toggleForm }: ILoginForm) {
           disabled={isLoading}
           onChange={onEmailChange}
         />
+
+        <Label className="sr-only" htmlFor="password">
+          Password
+        </Label>
+
+        <Input
+          id="password"
+          placeholder="password"
+          type="password"
+          disabled={isLoading}
+          onChange={onPasswordChange}
+          value={password}
+        />
       </div>
       {error && (
         <p className="text-sm text-muted-foreground text-rose-500">{error}</p>
@@ -76,7 +124,7 @@ export function SignupForm({ toggleForm }: ILoginForm) {
       <Button onClick={onSubmit}>
         <div style={{ display: 'flex', gap: '8px' }}>
           {isLoading && <SpinnerIcon width={18} height={18} />}
-          Sign In with Email
+          Sign up with Email
         </div>
       </Button>
 
