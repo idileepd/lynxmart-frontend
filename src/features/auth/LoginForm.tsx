@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Label } from '@radix-ui/react-label';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
+import { auth } from '../firebase';
 
 import { SpinnerIcon } from '@/components/icons';
 import { Input } from '@/components/ui/input';
@@ -36,7 +39,7 @@ export function LoginForm({ toggleForm }: ILoginForm) {
     return password.length >= 8;
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     try {
       if (!validateEmail()) {
         setError('Enter a valid email');
@@ -48,7 +51,12 @@ export function LoginForm({ toggleForm }: ILoginForm) {
 
         return;
       }
-
+      const useCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(useCredential.user);
       setIsLoading(true);
     } catch (err) {
       console.log(err);
