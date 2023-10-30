@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Label } from '@radix-ui/react-label';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
 
@@ -12,6 +13,8 @@ interface ILoginForm {
   toggleForm: () => void;
 }
 export function LoginForm({ toggleForm }: ILoginForm) {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -51,13 +54,14 @@ export function LoginForm({ toggleForm }: ILoginForm) {
 
         return;
       }
+      setIsLoading(true);
       const useCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
       console.log(useCredential.user);
-      setIsLoading(true);
+      navigate('/');
     } catch (err) {
       console.log(err);
       setError('Something Went Wrong !');

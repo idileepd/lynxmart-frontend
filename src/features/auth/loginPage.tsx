@@ -24,9 +24,25 @@ export function LoginPage() {
           }}
         >
           <Link to="/">
-            <div className={classes.logoBox}>
+            <div
+              style={{
+                display: 'flex',
+                gap: '10px',
+                paddingTop: '28px',
+                paddingLeft: '22px',
+              }}
+            >
               <LogoIcon width={32} height={32} fill="#fff" />
-              <div className={classes.name}>LynxMart</div>
+              <div
+                style={{
+                  fontWeight: '400',
+                  fontSize: '1.3rem',
+                  color: '#fff',
+                  letterSpacing: '.5px',
+                }}
+              >
+                LynxMart
+              </div>
             </div>
           </Link>
           <div

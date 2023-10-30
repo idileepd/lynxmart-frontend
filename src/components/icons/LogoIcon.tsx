@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { SVGProps } from '@/types/SvgProps';
 
 export const LogoIcon: FC<SVGProps> = ({
-  width = '800px',
-  height = '800px',
+  width = '32px',
+  height = '32px',
   fill = '#000000',
   cursor,
 }) => {

@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import { Label } from '@radix-ui/react-label';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
 
 import { SpinnerIcon } from '@/components/icons';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { delay } from '@/utils';
 
 interface ILoginForm {
   toggleForm: () => void;
 }
 export function SignupForm({ toggleForm }: ILoginForm) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -59,17 +62,10 @@ export function SignupForm({ toggleForm }: ILoginForm) {
         email,
         password
       );
+      await delay(4);
       console.log(useCredential.user);
-      //   .then((userCredential) => {
-      //     // Signed up
-      //     const user = userCredential.user;
-      //     // ...
-      //   })
-      //   .catch((error) => {
-      //     const errorCode = error.code;
-      //     const errorMessage = error.message;
-      //     // ..
-      //   });
+
+      navigate('/');
     } catch (err) {
       console.log(err);
       setError('Something Went Wrong !');
